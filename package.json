@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.0.35",
+    "@maticnetwork/meta": "2.4.3",
+    "@maticnetwork/maticjs": "2.0.7",
     "axios": "^0.19.2",
     "console.table": "^0.10.0",
     "dotenv": "^8.2.0",
