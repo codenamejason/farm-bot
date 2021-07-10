@@ -1,7 +1,7 @@
 const bn = require("bn.js");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
-const Network = require("@maticnetwork/meta/network");
+const Network = require("@maticnetwork/meta");
 const Matic = require("@maticnetwork/maticjs").default;
 
 const SCALING_FACTOR = new bn(10).pow(new bn(18));
