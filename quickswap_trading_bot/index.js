@@ -10,9 +10,6 @@ const numeral = require('numeral')
 const _ = require('lodash')
 const axios = require('axios')
 
-const UNISWAP = require('@uniswap/sdk')
-console.log(`The chainId of mainnet is ${UNISWAP.ChainId.MAINNET}.`)
-
 // SERVER CONFIG
 const PORT = process.env.PORT || 5000
 const app = express();

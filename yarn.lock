@@ -757,12 +757,7 @@
     "@uniswap/lib" "1.1.1"
     "@uniswap/v2-core" "1.0.0"
 
-"@uniswap/v3-core@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@uniswap/v3-core/-/v3-core-1.0.0.tgz"
-  integrity sha512-kSC4djMGKMHj7sLMYVnn61k9nu+lHjMIxgg9CDQT+s2QYLoA56GbSK9Oxr+qJXzzygbkrmuY6cwgP6cW2JXPFA==
-
-"@uniswap/v3-core@^1.0.0":
+"@uniswap/v3-core@1.0.0", "@uniswap/v3-core@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@uniswap/v3-core/-/v3-core-1.0.0.tgz#6c24adacc4c25dceee0ba3ca142b35adbd7e359d"
   integrity sha512-kSC4djMGKMHj7sLMYVnn61k9nu+lHjMIxgg9CDQT+s2QYLoA56GbSK9Oxr+qJXzzygbkrmuY6cwgP6cW2JXPFA==
@@ -4261,6 +4256,24 @@ query-string@^5.0.1:
     decode-uri-component "^0.2.0"
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
+
+quickswap-default-token-list@^1.0.73:
+  version "1.0.73"
+  resolved "https://registry.yarnpkg.com/quickswap-default-token-list/-/quickswap-default-token-list-1.0.73.tgz#9ba16293c808f2283fca88cc84d0afd8d0cd1e7d"
+  integrity sha512-XERZtjYcdYzWqsfp1kukexPQYz70R92EfMjbtrrlDnULEKJYKvR1QfMobl3bZrEMWGdzOe6xhFLALj2REPSqfw==
+
+quickswap-sdk@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/quickswap-sdk/-/quickswap-sdk-3.0.8.tgz#7fada995bb4e054212a0920de1f29977d617c997"
+  integrity sha512-1pMOS5/RC4K++RCrt3hrhSHDzzVzy40CiLgM8UbvdSVUuYMN5jZZVocbkG+5fRlJA1JqhKhs2OYYLh08t50KOw==
+  dependencies:
+    "@uniswap/v2-core" "^1.0.0"
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.1"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.3"
+    toformat "^2.0.0"
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.0.6, randombytes@^2.1.0:
   version "2.1.0"

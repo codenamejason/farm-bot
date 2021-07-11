@@ -115,7 +115,18 @@ async function tradeWethForDai() {
 }
 
 
-
+const tradeExample1 = async () => {
+	const dai = await Fetcher.fetchTokenData(chainId, '0x6B175474E89094C44Da98b954EedeAC495271d0F', provider);
+	const weth = WETH[chainId];
+	const pair = await Fetcher.fetchPairData(dai, weth, provider);
+	const route = new Route([pair], weth);
+	const trade = new Trade(route, new TokenAmount(weth, '100000000000000000'), TradeType.EXACT_INPUT);
+	console.log("Mid Price WETH --> DAI:", route.midPrice.toSignificant(6));
+	console.log("Mid Price DAI --> WETH:", route.midPrice.invert().toSignificant(6));
+	console.log("-".repeat(45));
+	console.log("Execution Price WETH --> DAI:", trade.executionPrice.toSignificant(6));
+	console.log("Mid Price after trade WETH --> DAI:", trade.nextMidPrice.toSignificant(6));
+}
 
 // Function Executions
 
