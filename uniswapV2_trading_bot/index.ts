@@ -1,4 +1,4 @@
-import { ChainId, Token, Fetcher, WETH, Pair, Route, TokenAmount, Trade, TradeOptions, TradeOptionsDeadline, TradeType } from '@uniswap/sdk'
+import { ChainId, Token, Fetcher, WETH, Pair, Route, TokenAmount, Trade, TradeOptions, TradeOptionsDeadline, TradeType, Percent, Price, FACTORY_ADDRESS, INIT_CODE_HASH } from '@uniswap/sdk'
 import { ethers } from "ethers";
 import { Pool } from "@uniswap/v3-sdk";
 import { Address } from "cluster";
@@ -12,26 +12,32 @@ console.log(`The chainId of mainnet is ${ChainId.MAINNET}.`)
 const chainId = ChainId.MAINNET;
 const testChainId = ChainId.KOVAN; // kovan testnet chain id
 
+/** Token Addresses */
 const platinTokenAddress = '0x782eb3304F8b9adD877F13a5cA321f72c4AA9804'; // Polygon Mainet
 const daiTokenAddress = '0x6B175474E89094C44Da98b954EedeAC495271d0F'; // Ethereum Mainnet Dai Address
-const decimals = 18;
+const usdcTokenAddress = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48';
 
-const DAI = new Token(chainId, daiTokenAddress, decimals);
-const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6)
+/** Token Abi's */
 
-async function getDecimals(chainId: ChainId, tokenAddress: string): Promise<number> {
-    // implimentaion here...
 
-    return 18; // hardcoded for now at 18, the most common.
-}
+/** Misc. */
+
+
+/** Tokens */
+const DAI = new Token(chainId, daiTokenAddress, 18);
+const USDC = new Token(ChainId.MAINNET, usdcTokenAddress, 6)
+
+
+
 
 async function getTokenInfo(chainId: ChainId, tokenAddress: string) {
     const DAI_Fetched: Token = await Fetcher.fetchTokenData(chainId, daiTokenAddress);
 }
+
 // Token Pair info functions
 
 /** Fetch token pair data */
-async function getPair(): Promise<Pair> {
+async function getDaiWethPair(): Promise<Pair> {
     const pairAddress = Pair.getAddress(DAI, WETH[DAI.chainId])
 
     //const reserves = [/** use pair address to fetch the reserves here */]
@@ -88,7 +94,25 @@ async function getExecutionPrice() {
 
 // Trade Execution Functions
 
+async function tradeWethForDai() {
+    // note that you may want/need to handle this async code differently,
+    // for example if top-level await is not an option
+    const pair = await Fetcher.fetchPairData(DAI, WETH[DAI.chainId])
 
+    const route = new Route([pair], WETH[DAI.chainId])
+
+    const amountIn = '1000000000000000000' // 1 WETH
+
+    const trade = new Trade(route, new TokenAmount(WETH[DAI.chainId], amountIn), TradeType.EXACT_INPUT)
+
+    const slippageTolerance = new Percent('50', '10000') // 50 bips, or 0.50%
+
+    const amountOutMin = trade.minimumAmountOut(slippageTolerance).raw // needs to be converted to e.g. hex
+    const path = [WETH[DAI.chainId].address, DAI.address]
+    const to = '' // should be a checksummed recipient address
+    const deadline = Math.floor(Date.now() / 1000) + 60 * 20 // 20 minutes from the current Unix time
+    const value = trade.inputAmount.raw // // needs to be converted to e.g. hex
+}
 
 
 

@@ -1,5 +1,5 @@
 require('dotenv').config()
-//const IUniswapV2Router02 = require('@uniswap/v2-periphery/build/IUniswapV2Router02.json')
+const { FACTORY_ADDRESS, INIT_CODE_HASH } = require('@uniswap/sdk')
 const express = require('express')
 const bodyParser = require('body-parser')
 const http = require('http')
@@ -9,6 +9,7 @@ const moment = require('moment-timezone')
 const numeral = require('numeral')
 const _ = require('lodash')
 const axios = require('axios')
+const {ethers} = require('ethers')
 
 // SERVER CONFIG
 const PORT = process.env.PORT || 5000
@@ -48,8 +49,8 @@ async function execute() {
 
 // Uniswap Factory Contract: https://etherscan.io/address/0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95#code
 const UNISWAP_FACTORY_ABI = []
-const UNISWAP_FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
-const uniswapFactoryContract = new web3.eth.Contract(UNISWAP_FACTORY_ABI, UNISWAP_FACTORY_ADDRESS)
+const UNISWAP_FACTORY_ADDRESS = FACTORY_ADDRESS;
+const uniswapFactoryContract = new ethers.Contract(UNISWAP_FACTORY_ABI, UNISWAP_FACTORY_ADDRESS)
 
 // Uniswap Exchange Template: https://etherscan.io/address/0x09cabEC1eAd1c0Ba254B09efb3EE13841712bE14#code
 // This is V1, we need V2 or V3!
